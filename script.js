@@ -8,11 +8,11 @@ function aulaSplice() {
 
   // console.log(arraySplice);
 }
+
 aulaSplice();
 
 // Sobre Filter!
-
-  // filter t medeiro
+  
 {
   const clientes = [
     { name: "Fulano", lastName: "Da Silva", age: 14 },
@@ -28,8 +28,7 @@ aulaSplice();
   });
   // console.log(clientesMaiores);
 }
-
-  // filter progrmbr
+  
 {
   function novoAluno(nome, idade) {
     return { nome, idade }
@@ -79,7 +78,6 @@ aulaSplice();
   // console.log(alunosMenosDeTrinta);
 }
 
-  // filter udemy
 {
   const produtos = [
     { name: "Notebook", preco: 2499, fragil: true },
@@ -100,15 +98,14 @@ aulaSplice();
   }
 
   // console.log(produtos.filter((validate)));
-
 }
 
 // ========================================================= // ===============================
 
 // sobre Map!
-
-  // map t medeiro
 {
+  // map t medeiro
+
   const clientesMap = [
     { name: "Fulano", lastName: "Da Silva", age: 14 },
     { name: "Santos", lastName: "Henrique", age: 12 },
@@ -127,6 +124,90 @@ aulaSplice();
     
     return { "name": `${cliente.name} ${cliente.lastName}` };
   });
-
-  console.log(clientesFinalMap);
 }
+
+// ========================================================= // ===============================
+
+
+// sobre Reduce!
+{ 
+
+  // é obrigatorio passar sempre um acc(acumulator), e um cur(current)
+  // o acumulator é o seu novo "item", e o current é sempre o item atual 
+  // do que esta sendo percorrido, e sempre precisa retornar o acumulator
+
+  const agents = [
+    { name: "Leandro", score: 98 },
+    { name: "Sandra", score: 80 },
+    { name: "Gustavo", score: 34 },
+    { name: "João", score: 38 },
+    { name: "Ana Clara", score: 50 },
+  ]
+
+  const agentsFinal = agents.reduce((acc, cur) => {
+
+    if (cur.score >= 50) {
+      acc.pass.push(cur);
+    } else {
+      acc.fail.push(cur);
+    }
+
+    return acc;
+  }, {
+    pass: [],
+    fail: []
+  });
+
+  // console.log(agentsFinal);
+
+}
+
+// ========================================================= // ===============================
+
+
+// Sobre JSON
+{
+
+  // t medeiro
+
+  const objeto = {
+    name: "fulano",
+    idade: 23
+  }
+  
+  const json = JSON.stringify(objeto);
+  
+  const jsonParse = JSON.parse(json);
+  
+  // console.log(jsonParse);
+}
+
+// Sobre localStorage
+{
+
+  const tarefas = [
+    { tarefa: 'Estudar Js'},
+    { tarefa: 'Estudar node.js'},
+    { tarefa: 'Estudar react.js'},
+  ]
+
+  const tarefasJson = JSON.stringify(tarefas);
+  localStorage.setItem('item1', tarefasJson);
+
+  const teste = localStorage.getItem('item1');
+  JSON.parse(teste);
+}
+
+// Sincrono e Assincrono
+
+function primary() {
+  console.log("Primary");
+}
+
+function secound() {
+  console.log("Second");
+}
+
+setTimeout(primary, 2000); // Assincrono
+
+secound();
