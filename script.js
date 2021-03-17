@@ -200,6 +200,8 @@ aulaSplice();
 
 // Sincrono e Assincrono
 
+{
+
 function primary() {
   console.log("Primary");
 }
@@ -208,6 +210,54 @@ function secound() {
   console.log("Second");
 }
 
-setTimeout(primary, 2000); // Assincrono
+// setTimeout(primary, 2000); // Assincrono
 
-secound();
+// secound();
+
+}
+
+// Ajax e Promise
+
+{
+  // Rotas == Endpoints
+
+  function bodyAddPhoto(response) {
+    const body = document.querySelector("body");
+        
+    body.style.cssText = `
+      background-image: url('${response[1].url}');
+      background-position: center;
+      background-size: cover;
+    `
+  }
+
+  const buttonLoad = document.querySelector("#btn");
+  // buttonLoad.onclick = () => loadPhotos().then(bodyAddPhoto).catch(alert("Erro"));
+
+  // buttonLoad.onclick = () => {
+  //   return loadPhotos().then(bodyAddPhoto).catch()
+  // };
+
+  function loadPhotos() {
+    return new Promise((resolve, reject) => {
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          const response = JSON.parse(this.responseText);
+
+          resolve(response);
+        }
+
+        if (this.status === 404) {
+          reject();
+        }
+
+      }
+
+      // xhttp.open('GET', 'https://jsonplaceholder.typicode.com/photos', true);
+      // xhttp.send();
+    }); 
+  }
+
+}
