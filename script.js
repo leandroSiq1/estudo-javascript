@@ -216,48 +216,85 @@ function secound() {
 
 }
 
-// Ajax e Promise
+// ASYNC AWAIT
 
 {
   // Rotas == Endpoints
 
-  function bodyAddPhoto(response) {
-    const body = document.querySelector("body");
-        
-    body.style.cssText = `
-      background-image: url('${response[1].url}');
-      background-position: center;
-      background-size: cover;
-    `
-  }
-
   const buttonLoad = document.querySelector("#btn");
-  // buttonLoad.onclick = () => loadPhotos().then(bodyAddPhoto).catch(alert("Erro"));
+  // buttonLoad.addEventListener('click', loadPhotos);
 
-  // buttonLoad.onclick = () => {
-  //   return loadPhotos().then(bodyAddPhoto).catch()
-  // };
-
-  function loadPhotos() {
-    return new Promise((resolve, reject) => {
-      const xhttp = new XMLHttpRequest();
-
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          const response = JSON.parse(this.responseText);
-
-          resolve(response);
-        }
-
-        if (this.status === 404) {
-          reject();
-        }
-
-      }
-
-      // xhttp.open('GET', 'https://jsonplaceholder.typicode.com/photos', true);
-      // xhttp.send();
-    }); 
+  function tranformarJson(response) {
+    return response.json();
   }
 
+  function exibirNaTela(dados) {
+    console.log(dados);
+  }
+
+  function exibirErro() {
+    console.log("Ops, deu erro!");
+  }
+
+  const configs = {
+    method: 'GET',
+    headers: {}
+  }
+
+  // o async permite eu transforma algo que é assincrono em sincrono
+  // e o await eu uso quando a minha function é uma promise ex: do fetch, e precisa ter o 
+  // async na function
+
+  async function loadPhotos() {
+   const dados = await fetch('https://jsonplaceholder.typicode.com/photos', configs)
+    .then(tranformarJson) // retornando os dados para a variavel
+    .catch(exibirErro);
+
+    // console.log(dados);
+  }
+
+  // function loadPhotos() {
+  //   fetch('https://jsonplaceholder.typicode.com/photos', configs)
+  //   .then(tranformarJson)
+  //   .then(exibirNaTela) // estou passando os dados pela function transformJson, pois estou retornando esses dados e ja estou passando para exibirTela pelo then
+  //   .catch(exibirErro);
+  // }
+}
+
+// Desestructuring Assingment == 
+// (desestruturação de atribuição)
+
+{
+  {
+    
+    const obj = {
+      name: "Leandro",
+      age: 19
+    }
+    const { name: nameUser, age } = obj;
+    // console.log(nameUser);
+    // as variaveis pricisa ter o mesmo nome das props do obj, porém caso queira mudar de nome
+    // basta fazer igual o modelo acima, (nome da prop do obj: (o nome que voce queira dar para a variavel) )
+  }
+
+  function tranformarJson(response) {
+    return response.json();
+  }
+
+  function exibirErro() {
+    console.log("Ops, deu erro!");
+  }
+
+  async function loadPhotos() {
+   const dados = await fetch('https://jsonplaceholder.typicode.com/photos/1')
+    .then(tranformarJson) 
+    .catch(exibirErro);
+
+    const { title, url, albumId } = dados;
+
+    console.log(title, url, albumId);
+  }
+  
+  const buttonLoad = document.querySelector("#btn");
+  buttonLoad.addEventListener('click', loadPhotos);
 }

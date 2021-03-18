@@ -139,8 +139,8 @@
     },
   ];
 
-  const button = document.querySelector("#filter");
-  button.addEventListener('click', filtrarNotas);
+  // const button = document.querySelector("#filter");
+  // button.addEventListener('click', filtrarNotas);
 
   function filtrarNotas() {
     const input = document.querySelector("#input");
@@ -165,4 +165,32 @@
 
   }
 
+}
+
+// Exercicio 5
+
+{
+  // Link para revisão sobre asyn/callback https://medium.com/@alcidesqueiroz/javascript-ass%C3%ADncrono-callbacks-promises-e-async-functions-9191b8272298
+
+  // crie uma função que retorne uma promise
+  // essa função deverá levar 10 segundos para ser resolvida com o método resolve()
+  // ela deve resolver com texto: 'Ok, promise resolvida!' 
+  // você deve exibr esse texto no console
+
+
+  function job() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Ok, parece que funcionou! function assincrona');
+      }, 2000);
+    });
+  }
+
+  // job().then(msg => console.log(msg));
+
+  function teste() {
+    console.log("Teste, function sincrona");
+  }
+
+  // teste();
 }
