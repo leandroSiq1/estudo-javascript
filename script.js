@@ -219,6 +219,48 @@ function secound() {
 // ASYNC AWAIT
 
 {
+  // promisse
+
+  const users = ["Leandro", "Adriana", "João"];
+
+  function insertUser(name) {
+
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        users.push(name);
+        const error = false;
+
+        if (!error) {
+          resolve();
+        } else {
+          reject({ message: 'Opss! houve um erro!'})
+        }
+
+      }, 1000);
+    });
+    return promise;
+  }
+
+  function listUsers() {
+    console.log(users);
+  }
+
+  // insertUser("Arthur")
+  // .then(listUsers)
+  // .catch((error) => {
+  //   console.log(error)
+  // });
+
+  async function exect() {
+    await insertUser("Arthur");
+    listUsers();
+  }
+
+  exect();
+
+}
+
+{
   // Rotas == Endpoints
 
   const buttonLoad = document.querySelector("#btn");
@@ -294,7 +336,6 @@ function secound() {
 
     console.log(title, url, albumId);
   }
-  
   const buttonLoad = document.querySelector("#btn");
   buttonLoad.addEventListener('click', loadPhotos);
 }
